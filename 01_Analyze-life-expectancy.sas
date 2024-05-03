@@ -11,7 +11,7 @@
 using the following code--but to use this code you'll have to fill in the file path*/
 
 PROC IMPORT OUT= WORK.LE_DATA 
-            DATAFILE= "H:\life-expectancy\data\Life-expectancy-by-state-long.csv" 
+ DATAFILE= "H:\life-expectancy\data\Life-expectancy-by-state-long.csv" 
             DBMS=CSV REPLACE;
      GETNAMES=YES;
      DATAROW=2; 
