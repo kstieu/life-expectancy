@@ -11,7 +11,7 @@
 using the following code--but to use this code you'll have to fill in the file path*/
 
 PROC IMPORT OUT= WORK.LE_DATA 
-            DATAFILE= "YourFilePathHere\data\Life-expectancy-by-state-long.csv" 
+            DATAFILE= "H:\life-expectancy\data\life.csv" 
             DBMS=CSV REPLACE;
      GETNAMES=YES;
      DATAROW=2; 
@@ -38,3 +38,14 @@ proc reg data=le_data  plots(only)=fitplot; /*We just want to save one of the pl
 ods listing close;
 
 /*Note that numbers and/or underscores might get appended to the image file name if you run the code more than once.*/
+
+proc sort data=le_data; by state race sex; run;
+proc means data=le_data; by state race sex; var le; output out=le_averages mean=mean_le ; run;
+
+proc print data=le_averages (obs=10); run;
+
+PROC EXPORT DATA= WORK.LE_AVERAGES 
+            OUTFILE= "H:\life-expectancy\data\le_averages.csv" 
+            DBMS=CSV REPLACE;
+     PUTNAMES=YES;
+RUN;
